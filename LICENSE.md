@@ -1,1 +1,1 @@
-This project is public domain.
+This project is public domain. Use as you wish.
