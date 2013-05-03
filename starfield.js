@@ -1,9 +1,11 @@
 function draw(){
     canvas.clearRect(0,0,width,height);
+
     i=4;
     do{
         stars.push([Math.random()*width,Math.random()*height,0])
     }while(i--);
+
     i=stars.length-1;
     do{
         if(stars[i][0]<0||stars[i][0]>width||stars[i][1]<0||stars[i][1]>height){
@@ -21,8 +23,8 @@ function get(i){
     return document.getElementById(i)
 }
 function resize(){
-    width=get('c').width=window.innerWidth;
-    height=get('c').height=window.innerHeight;
+    width=get('canvas').width=window.innerWidth;
+    height=get('canvas').height=window.innerHeight;
     x=width/2;
     y=height/2;
     ratio=width/height
@@ -32,7 +34,7 @@ stars=[];
 
 window.onresize=resize;
 
-canvas=get('c').getContext('2d');
+canvas=get('canvas').getContext('2d');
 
 resize();
 
