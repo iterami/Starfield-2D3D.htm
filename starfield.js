@@ -43,9 +43,11 @@ function draw(){
         }
     }while(i--)
 }
+
 function get(i){
     return document.getElementById(i)
 }
+
 function resize(){
     width = get('canvas').width = window.innerWidth;
     height = get('canvas').height = window.innerHeight;
@@ -55,6 +57,7 @@ function resize(){
 
     ratio = width/height
 }
+
 var canvas = get('canvas').getContext('2d');
 var height = 0;
 var i = 0;
