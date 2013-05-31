@@ -33,7 +33,7 @@ function draw(){
             stars[i][1] += Math.abs((stars[i][1] - y) / y) * (stars[i][1] > y ? 9 : -9) * (stars[i][2] / 99);
 
             /*draw stars*/
-            canvas.fillStyle = 'rgb('+stars[i][2]+','+stars[i][2]+','+stars[i][2]+')';
+            canvas.fillStyle = 'rgb(' + stars[i][2] + ',' + stars[i][2] + ',' + stars[i][2] + ')';
             canvas.fillRect(
                 stars[i][0],
                 stars[i][1],
@@ -55,7 +55,7 @@ function resize(){
     x = width / 2;
     y = height / 2;
 
-    ratio = width/height
+    ratio = width / height
 }
 
 var canvas = get('canvas').getContext('2d');
