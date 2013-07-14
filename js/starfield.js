@@ -6,34 +6,34 @@ function draw(){
         height
     );
 
-    /* create 5 stars at random positions */
+    // create 5 stars at random positions
     i = 4;
     do{
         stars.push([
-            Math.random() * width,/* star x */
-            Math.random() * height,/* star y */
-            0/* star brightness */
+            Math.random() * width,// star x
+            Math.random() * height,// star y
+            0// star brightness
         ]);
     }while(i--);
 
     i = stars.length - 1;
     do{
         if(stars[i][0] < 0 || stars[i][0] > width || stars[i][1] < 0 || stars[i][1] > height){
-            /* splice stars that are outside the canvas boundaries */
+            // splice stars that are outside the canvas boundaries
             stars.splice(
                 i,
                 1
             );
 
         }else{
-            /* increase star brightness */
+            // increase star brightness
             stars[i][2] += 9;
 
-            /* update star positions based on brightness */
+            // update star positions based on brightness
             stars[i][0] += Math.abs((stars[i][0] - x) / x) * ((stars[i][0] > x ? ratio : -ratio) * 9) * (stars[i][2] / 99);
             stars[i][1] += Math.abs((stars[i][1] - y) / y) * (stars[i][1] > y ? 9 : -9) * (stars[i][2] / 99);
 
-            /* draw stars */
+            // draw stars
             canvas.fillStyle = 'rgb(' + stars[i][2] + ', '
                                       + stars[i][2] + ', '
                                       + stars[i][2] + ')';

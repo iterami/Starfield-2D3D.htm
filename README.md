@@ -1,1 +1,1 @@
-A starfield created using CSS, HTML, and JavaScript. Public domain.
+A web-based infinite field of stars.
