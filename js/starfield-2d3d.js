@@ -6,13 +6,13 @@ function draw(){
       height
     );
 
-    // create 5 stars at random positions
+    // Create 5 stars at random positions.
     var loop_counter = 4;
     do{
         stars.push([
-          Math.random() * width,// star x
-          Math.random() * height,// star y
-          0// star brightness
+          Math.random() * width,// X
+          Math.random() * height,// Y
+          0,// Brightness
         ]);
     }while(loop_counter--);
 
@@ -22,17 +22,17 @@ function draw(){
           || stars[loop_counter][0] > width
           || stars[loop_counter][1] < 0
           || stars[loop_counter][1] > height){
-            // splice stars that are outside the canvas boundaries
+            // Splice stars that are outside the canvas boundaries.
             stars.splice(
               loop_counter,
               1
             );
 
         }else{
-            // increase star brightness
+            // Increase star brightness.
             stars[loop_counter][2] += 9;
 
-            // update star positions based on brightness
+            // Update star positions based on brightness.
             stars[loop_counter][0] += Math.abs((stars[loop_counter][0] - x) / x)
               * ((stars[loop_counter][0] > x ? ratio : -ratio) * 9)
               * (stars[loop_counter][2] / 99);
@@ -40,7 +40,7 @@ function draw(){
               * (stars[loop_counter][1] > y ? 9 : -9)
               * (stars[loop_counter][2] / 99);
 
-            // draw stars
+            // Draw stars.
             canvas.fillStyle = 'rgb('
               + stars[loop_counter][2] + ', '
               + stars[loop_counter][2] + ', '
