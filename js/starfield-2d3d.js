@@ -1,3 +1,11 @@
+function create_star(){
+    stars.push([
+      Math.random() * width,// X
+      Math.random() * height,// Y
+      0,// Brightness
+    ]);
+}
+
 function draw(){
     canvas.clearRect(
       0,
@@ -6,14 +14,41 @@ function draw(){
       height
     );
 
+    loop_counter = stars.length - 1;
+    do{
+        // Draw stars.
+        canvas.fillStyle = 'rgb('
+          + stars[loop_counter][2] + ', '
+          + stars[loop_counter][2] + ', '
+          + stars[loop_counter][2] + ')';
+        canvas.fillRect(
+          stars[loop_counter][0],
+          stars[loop_counter][1],
+          3,
+          3
+        );
+    }while(loop_counter--);
+
+    window.requestAnimationFrame(draw);
+}
+
+function init(){
+    resize();
+
+    create_star();
+
+    window.requestAnimationFrame(draw);
+    setInterval(
+      'logic()',
+      35
+    );
+}
+
+function logic(){
     // Create 5 stars at random positions.
     var loop_counter = 4;
     do{
-        stars.push([
-          Math.random() * width,// X
-          Math.random() * height,// Y
-          0,// Brightness
-        ]);
+        create_star();
     }while(loop_counter--);
 
     loop_counter = stars.length - 1;
@@ -39,18 +74,6 @@ function draw(){
             stars[loop_counter][1] += Math.abs((stars[loop_counter][1] - y) / y)
               * (stars[loop_counter][1] > y ? 9 : -9)
               * (stars[loop_counter][2] / 99);
-
-            // Draw stars.
-            canvas.fillStyle = 'rgb('
-              + stars[loop_counter][2] + ', '
-              + stars[loop_counter][2] + ', '
-              + stars[loop_counter][2] + ')';
-            canvas.fillRect(
-              stars[loop_counter][0],
-              stars[loop_counter][1],
-              3,
-              3
-            );
         }
     }while(loop_counter--);
 }
@@ -75,11 +98,6 @@ var width = 0;
 var x = 0;
 var y = 0;
 
-resize();
-
-setInterval(
-  'draw()',
-  35
-);
+window.onload = init;
 
 window.onresize = resize;
