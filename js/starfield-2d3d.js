@@ -32,18 +32,6 @@ function draw(){
     window.requestAnimationFrame(draw);
 }
 
-function init(){
-    resize();
-
-    create_star();
-
-    window.requestAnimationFrame(draw);
-    setInterval(
-      'logic()',
-      35
-    );
-}
-
 function logic(){
     // Create 5 stars at random positions.
     var loop_counter = 4;
@@ -98,6 +86,16 @@ var width = 0;
 var x = 0;
 var y = 0;
 
-window.onload = init;
+window.onload = function(){
+    resize();
+
+    create_star();
+
+    window.requestAnimationFrame(draw);
+    setInterval(
+      'logic()',
+      35
+    );
+};
 
 window.onresize = resize;
