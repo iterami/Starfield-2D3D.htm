@@ -50,19 +50,19 @@ function logic(){
               loop_counter,
               1
             );
-
-        }else{
-            // Increase star brightness.
-            stars[loop_counter][2] += 9;
-
-            // Update star positions based on brightness.
-            stars[loop_counter][0] += Math.abs((stars[loop_counter][0] - x) / x)
-              * ((stars[loop_counter][0] > x ? ratio : -ratio) * 9)
-              * (stars[loop_counter][2] / 99);
-            stars[loop_counter][1] += Math.abs((stars[loop_counter][1] - y) / y)
-              * (stars[loop_counter][1] > y ? 9 : -9)
-              * (stars[loop_counter][2] / 99);
+            continue;
         }
+
+        // Increase star brightness.
+        stars[loop_counter][2] += 9;
+
+        // Update star positions based on brightness.
+        stars[loop_counter][0] += Math.abs((stars[loop_counter][0] - x) / x)
+          * ((stars[loop_counter][0] > x ? ratio : -ratio) * 9)
+          * (stars[loop_counter][2] / 99);
+        stars[loop_counter][1] += Math.abs((stars[loop_counter][1] - y) / y)
+          * (stars[loop_counter][1] > y ? 9 : -9)
+          * (stars[loop_counter][2] / 99);
     }while(loop_counter--);
 }
 
