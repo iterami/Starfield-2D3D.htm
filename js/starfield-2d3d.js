@@ -92,7 +92,7 @@ window.onload = function(){
     create_star();
 
     window.requestAnimationFrame(draw);
-    setInterval(
+    window.setInterval(
       'logic()',
       35
     );
