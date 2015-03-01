@@ -1,11 +1,3 @@
-function create_star(){
-    stars.push([
-      Math.random() * width,// X
-      Math.random() * height,// Y
-      0,// Brightness
-    ]);
-}
-
 function draw(){
     canvas.clearRect(
       0,
@@ -14,20 +6,19 @@ function draw(){
       height
     );
 
-    loop_counter = stars.length - 1;
-    do{
+    for(var star in stars){
         // Draw stars.
         canvas.fillStyle = 'rgb('
-          + stars[loop_counter][2] + ', '
-          + stars[loop_counter][2] + ', '
-          + stars[loop_counter][2] + ')';
+          + stars[star][2] + ', '
+          + stars[star][2] + ', '
+          + stars[star][2] + ')';
         canvas.fillRect(
-          stars[loop_counter][0],
-          stars[loop_counter][1],
+          stars[star][0],
+          stars[star][1],
           3,
           3
         );
-    }while(loop_counter--);
+    }
 
     window.requestAnimationFrame(draw);
 }
@@ -36,34 +27,34 @@ function logic(){
     // Create 5 stars at random positions.
     var loop_counter = 4;
     do{
-        create_star();
+        stars.push([
+          Math.random() * width,// X
+          Math.random() * height,// Y
+          0,// Brightness
+        ]);
     }while(loop_counter--);
 
-    loop_counter = stars.length - 1;
-    do{
-        if(stars[loop_counter][0] < 0
-          || stars[loop_counter][0] > width
-          || stars[loop_counter][1] < 0
-          || stars[loop_counter][1] > height){
-            // Splice stars that are outside the canvas boundaries.
-            stars.splice(
-              loop_counter,
-              1
-            );
+    for(var star in stars){
+        if(stars[star][0] < 0
+          || stars[star][0] > width
+          || stars[star][1] < 0
+          || stars[star][1] > height){
+            // Delete stars that are outside the canvas boundaries.
+            delete stars[star];
             continue;
         }
 
         // Increase star brightness.
-        stars[loop_counter][2] += 9;
+        stars[star][2] += 9;
 
         // Update star positions based on brightness.
-        stars[loop_counter][0] += Math.abs((stars[loop_counter][0] - x) / x)
-          * ((stars[loop_counter][0] > x ? ratio : -ratio) * 9)
-          * (stars[loop_counter][2] / 99);
-        stars[loop_counter][1] += Math.abs((stars[loop_counter][1] - y) / y)
-          * (stars[loop_counter][1] > y ? 9 : -9)
-          * (stars[loop_counter][2] / 99);
-    }while(loop_counter--);
+        stars[star][0] += Math.abs((stars[star][0] - x) / x)
+          * ((stars[star][0] > x ? ratio : -ratio) * 9)
+          * (stars[star][2] / 99);
+        stars[star][1] += Math.abs((stars[star][1] - y) / y)
+          * (stars[star][1] > y ? 9 : -9)
+          * (stars[star][2] / 99);
+    }
 }
 
 function resize(){
@@ -88,8 +79,6 @@ var y = 0;
 
 window.onload = function(){
     resize();
-
-    create_star();
 
     window.requestAnimationFrame(draw);
     window.setInterval(
