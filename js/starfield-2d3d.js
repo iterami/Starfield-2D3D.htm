@@ -40,7 +40,10 @@ function logic(){
           || stars[star][1] < 0
           || stars[star][1] > height){
             // Delete stars that are outside the canvas boundaries.
-            delete stars[star];
+            stars.splice(
+              star,
+              1
+            );
             continue;
         }
 
