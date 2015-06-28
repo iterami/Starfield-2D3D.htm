@@ -9,12 +9,12 @@ function draw(){
     for(var star in stars){
         // Draw stars.
         canvas.fillStyle = 'rgb('
-          + stars[star][2] + ', '
-          + stars[star][2] + ', '
-          + stars[star][2] + ')';
+          + stars[star]['luminosity'] + ', '
+          + stars[star]['luminosity'] + ', '
+          + stars[star]['luminosity'] + ')';
         canvas.fillRect(
-          stars[star][0],
-          stars[star][1],
+          stars[star]['x'],
+          stars[star]['y'],
           3,
           3
         );
@@ -27,19 +27,19 @@ function logic(){
     // Create 5 stars at random positions.
     var loop_counter = 4;
     do{
-        stars.push([
-          Math.random() * width,// X
-          Math.random() * height,// Y
-          0,// Brightness
-        ]);
+        stars.push({
+          'luminosity': 0,
+          'x': Math.random() * width,
+          'y': Math.random() * height,
+        });
     }while(loop_counter--);
 
     for(var star in stars){
-        if(stars[star][0] < 0
-          || stars[star][0] > width
-          || stars[star][1] < 0
-          || stars[star][1] > height){
-            // Delete stars that are outside the canvas boundaries.
+        // Delete stars that are outside the canvas boundaries.
+        if(stars[star]['x'] < 0
+          || stars[star]['x'] > width
+          || stars[star]['y'] < 0
+          || stars[star]['y'] > height){
             stars.splice(
               star,
               1
@@ -47,16 +47,16 @@ function logic(){
             continue;
         }
 
-        // Increase star brightness.
-        stars[star][2] += 9;
+        // Increase star luminosity.
+        stars[star]['luminosity'] += 9;
 
-        // Update star positions based on brightness.
-        stars[star][0] += Math.abs((stars[star][0] - x) / x)
-          * ((stars[star][0] > x ? ratio : -ratio) * 9)
-          * (stars[star][2] / 99);
-        stars[star][1] += Math.abs((stars[star][1] - y) / y)
-          * (stars[star][1] > y ? 9 : -9)
-          * (stars[star][2] / 99);
+        // Update star positions based on luminosity.
+        stars[star]['x'] += Math.abs((stars[star]['x'] - x) / x)
+          * ((stars[star]['x'] > x ? ratio : -ratio) * 9)
+          * (stars[star]['luminosity'] / 99);
+        stars[star]['y'] += Math.abs((stars[star]['y'] - y) / y)
+          * (stars[star]['y'] > y ? 9 : -9)
+          * (stars[star]['luminosity'] / 99);
     }
 }
 
