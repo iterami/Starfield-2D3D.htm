@@ -1,3 +1,5 @@
+'use strict';
+
 function draw(){
     canvas.clearRect(
       0,
