@@ -74,7 +74,9 @@ function resize(){
     ratio = width / height;
 }
 
-var canvas = document.getElementById('canvas').getContext('2d');
+var canvas = document.getElementById('canvas').getContext('2d', {
+  'alpha': false,
+});
 var height = 0;
 var ratio = 0;
 var stars = [];
