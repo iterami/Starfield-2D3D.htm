@@ -1,7 +1,7 @@
 'use strict';
 
 function draw(){
-    canvas.clearRect(
+    buffer.clearRect(
       0,
       0,
       width,
@@ -10,17 +10,29 @@ function draw(){
 
     for(var star in stars){
         // Draw stars.
-        canvas.fillStyle = 'rgb('
+        buffer.fillStyle = 'rgb('
           + stars[star]['luminosity'] + ', '
           + stars[star]['luminosity'] + ', '
           + stars[star]['luminosity'] + ')';
-        canvas.fillRect(
+        buffer.fillRect(
           stars[star]['x'],
           stars[star]['y'],
           3,
           3
         );
     }
+
+    canvas.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
+    canvas.drawImage(
+      document.getElementById('buffer'),
+      0,
+      0
+    );
 
     window.requestAnimationFrame(draw);
 }
@@ -36,44 +48,50 @@ function logic(){
         });
     }while(loop_counter--);
 
-    for(var star in stars){
+    loop_counter = stars.length - 1;
+    do{
         // Delete stars that are outside the canvas boundaries.
-        if(stars[star]['x'] < 0
-          || stars[star]['x'] > width
-          || stars[star]['y'] < 0
-          || stars[star]['y'] > height){
+        if(stars[loop_counter]['x'] < 0
+          || stars[loop_counter]['x'] > width
+          || stars[loop_counter]['y'] < 0
+          || stars[loop_counter]['y'] > height){
             stars.splice(
-              star,
+              loop_counter,
               1
             );
             continue;
         }
 
         // Increase star luminosity.
-        stars[star]['luminosity'] += 9;
+        stars[loop_counter]['luminosity'] += 9;
 
         // Update star positions based on luminosity.
-        stars[star]['x'] += Math.abs((stars[star]['x'] - x) / x)
-          * ((stars[star]['x'] > x ? ratio : -ratio) * 9)
-          * (stars[star]['luminosity'] / 99);
-        stars[star]['y'] += Math.abs((stars[star]['y'] - y) / y)
-          * (stars[star]['y'] > y ? 9 : -9)
-          * (stars[star]['luminosity'] / 99);
-    }
+        stars[loop_counter]['x'] += Math.abs((stars[loop_counter]['x'] - x) / x)
+          * ((stars[loop_counter]['x'] > x ? ratio : -ratio) * 9)
+          * (stars[loop_counter]['luminosity'] / 99);
+        stars[loop_counter]['y'] += Math.abs((stars[loop_counter]['y'] - y) / y)
+          * (stars[loop_counter]['y'] > y ? 9 : -9)
+          * (stars[loop_counter]['luminosity'] / 99);
+    }while(loop_counter--);
 }
 
 function resize(){
     height = window.innerHeight;
+    document.getElementById('buffer').height = height;
     document.getElementById('canvas').height = height;
     y = height / 2;
 
     width = window.innerWidth;
+    document.getElementById('buffer').width = width;
     document.getElementById('canvas').width = width;
     x = width / 2;
 
     ratio = width / height;
 }
 
+var buffer = document.getElementById('buffer').getContext('2d', {
+  'alpha': false,
+});
 var canvas = document.getElementById('canvas').getContext('2d', {
   'alpha': false,
 });

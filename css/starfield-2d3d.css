@@ -1,6 +1,9 @@
 body{
     background: #000;
 }
+#buffer{
+    display: none;
+}
 canvas{
     left: 0;
     position: absolute;
