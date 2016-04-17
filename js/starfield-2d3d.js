@@ -62,4 +62,3 @@ var ratio = 0;
 var stars = [];
 
 window.onload = init_canvas;
-window.onresize = resize;
