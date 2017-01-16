@@ -1,7 +1,7 @@
 iterami/Starfield-2D3D.htm
 --------------------------
 
-A web-based infinite field of stars.
+Infinite field of stars made with the canvas.
 
 ---
 
