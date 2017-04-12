@@ -4,9 +4,9 @@ function draw_logic(){
     for(var star in stars){
         // Draw stars.
         canvas_buffer.fillStyle = 'rgb('
-          + stars[star]['luminosity'] + ', '
-          + stars[star]['luminosity'] + ', '
-          + stars[star]['luminosity'] + ')';
+          + stars[star]['brightness'] + ', '
+          + stars[star]['brightness'] + ', '
+          + stars[star]['brightness'] + ')';
         canvas_buffer.fillRect(
           stars[star]['x'],
           stars[star]['y'],
@@ -21,7 +21,7 @@ function logic(){
     var loop_counter = 4;
     do{
         stars.push({
-          'luminosity': 0,
+          'brightness': 0,
           'x': Math.random() * canvas_width,
           'y': Math.random() * canvas_height,
         });
@@ -41,16 +41,16 @@ function logic(){
             continue;
         }
 
-        // Increase star luminosity.
-        stars[loop_counter]['luminosity'] += 9;
+        // Increase star brightness.
+        stars[loop_counter]['brightness'] += 9;
 
-        // Update star positions based on luminosity.
+        // Update star positions based on brightness.
         stars[loop_counter]['x'] += Math.abs((stars[loop_counter]['x'] - canvas_x) / canvas_x)
           * ((stars[loop_counter]['x'] > canvas_x ? ratio : -ratio) * 9)
-          * (stars[loop_counter]['luminosity'] / 99);
+          * (stars[loop_counter]['brightness'] / 99);
         stars[loop_counter]['y'] += Math.abs((stars[loop_counter]['y'] - canvas_y) / canvas_y)
           * (stars[loop_counter]['y'] > canvas_y ? 9 : -9)
-          * (stars[loop_counter]['luminosity'] / 99);
+          * (stars[loop_counter]['brightness'] / 99);
     }while(loop_counter--);
 }
 
