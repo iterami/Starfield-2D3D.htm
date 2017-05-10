@@ -22,8 +22,12 @@ function logic(){
     do{
         stars.push({
           'brightness': 0,
-          'x': Math.random() * canvas_width,
-          'y': Math.random() * canvas_height,
+          'x': core_random_integer({
+            'max': canvas_width,
+          }),
+          'y': core_random_integer({
+            'max': canvas_height,
+          }),
         });
     }while(loop_counter--);
 
