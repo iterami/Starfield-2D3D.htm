@@ -58,11 +58,13 @@ function logic(){
     }while(loop_counter--);
 }
 
+function repo_init(){
+    canvas_init();
+}
+
 function resize_logic(){
     ratio = canvas_width / canvas_height;
 }
 
 var ratio = 0;
 var stars = [];
-
-window.onload = canvas_init;
