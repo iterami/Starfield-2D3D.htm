@@ -59,6 +59,9 @@ function logic(){
 }
 
 function repo_init(){
+    core_repo_init({
+      'title': 'Starfield-2D3D.htm',
+    });
     canvas_init();
 }
 
