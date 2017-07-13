@@ -1,15 +1,15 @@
 'use strict';
 
 function draw_logic(){
-    for(var star in stars){
+    for(var entity in core_entities){
         // Draw stars.
         canvas_buffer.fillStyle = 'rgb('
-          + stars[star]['brightness'] + ', '
-          + stars[star]['brightness'] + ', '
-          + stars[star]['brightness'] + ')';
+          + core_entities[entity]['brightness'] + ', '
+          + core_entities[entity]['brightness'] + ', '
+          + core_entities[entity]['brightness'] + ')';
         canvas_buffer.fillRect(
-          stars[star]['x'],
-          stars[star]['y'],
+          core_entities[entity]['x'],
+          core_entities[entity]['y'],
           3,
           3
         );
@@ -20,42 +20,40 @@ function logic(){
     // Create 5 stars at random positions.
     var loop_counter = 4;
     do{
-        stars.push({
-          'brightness': 0,
-          'x': core_random_integer({
-            'max': canvas_width,
-          }),
-          'y': core_random_integer({
-            'max': canvas_height,
-          }),
+        core_entity_create({
+          'properties': {
+            'brightness': 0,
+            'x': core_random_integer({
+              'max': canvas_width,
+            }),
+            'y': core_random_integer({
+              'max': canvas_height,
+            }),
+          },
         });
     }while(loop_counter--);
 
-    loop_counter = stars.length - 1;
-    do{
+    for(var entity in core_entities){
         // Delete stars that are outside the canvas boundaries.
-        if(stars[loop_counter]['x'] < 0
-          || stars[loop_counter]['x'] > canvas_width
-          || stars[loop_counter]['y'] < 0
-          || stars[loop_counter]['y'] > canvas_height){
-            stars.splice(
-              loop_counter,
-              1
-            );
+        if(core_entities[entity]['x'] < 0
+          || core_entities[entity]['x'] > canvas_width
+          || core_entities[entity]['y'] < 0
+          || core_entities[entity]['y'] > canvas_height){
+            delete core_entities[entity];
             continue;
         }
 
         // Increase star brightness.
-        stars[loop_counter]['brightness'] += 9;
+        core_entities[entity]['brightness'] += 9;
 
         // Update star positions based on brightness.
-        stars[loop_counter]['x'] += Math.abs((stars[loop_counter]['x'] - canvas_x) / canvas_x)
-          * ((stars[loop_counter]['x'] > canvas_x ? ratio : -ratio) * 9)
-          * (stars[loop_counter]['brightness'] / 99);
-        stars[loop_counter]['y'] += Math.abs((stars[loop_counter]['y'] - canvas_y) / canvas_y)
-          * (stars[loop_counter]['y'] > canvas_y ? 9 : -9)
-          * (stars[loop_counter]['brightness'] / 99);
-    }while(loop_counter--);
+        core_entities[entity]['x'] += Math.abs((core_entities[entity]['x'] - canvas_x) / canvas_x)
+          * ((core_entities[entity]['x'] > canvas_x ? ratio : -ratio) * 9)
+          * (core_entities[entity]['brightness'] / 99);
+        core_entities[entity]['y'] += Math.abs((core_entities[entity]['y'] - canvas_y) / canvas_y)
+          * (core_entities[entity]['y'] > canvas_y ? 9 : -9)
+          * (core_entities[entity]['brightness'] / 99);
+    }
 }
 
 function repo_init(){
@@ -70,4 +68,3 @@ function resize_logic(){
 }
 
 var ratio = 0;
-var stars = [];
