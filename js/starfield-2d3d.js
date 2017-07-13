@@ -39,7 +39,11 @@ function logic(){
           || core_entities[entity]['x'] > canvas_width
           || core_entities[entity]['y'] < 0
           || core_entities[entity]['y'] > canvas_height){
-            delete core_entities[entity];
+            core_entity_remove({
+              'entities': [
+                entity,
+              ],
+            });
             continue;
         }
 
