@@ -22,7 +22,6 @@ function logic(){
     do{
         core_entity_create({
           'properties': {
-            'brightness': 0,
             'x': core_random_integer({
               'max': canvas_width,
             }),
@@ -30,6 +29,9 @@ function logic(){
               'max': canvas_height,
             }),
           },
+          'types': [
+            'star',
+          ],
         });
     }while(loop_counter--);
 
@@ -62,6 +64,13 @@ function logic(){
 
 function repo_init(){
     core_repo_init({
+      'entities': {
+        'star': {
+          'properties': {
+            'brightness': 0,
+          },
+        },
+      },
       'title': 'Starfield-2D3D.htm',
     });
     canvas_init();
