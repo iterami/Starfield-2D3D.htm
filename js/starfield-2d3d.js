@@ -1,19 +1,24 @@
 'use strict';
 
 function draw_logic(){
-    for(var entity in core_entities){
-        // Draw stars.
-        canvas_buffer.fillStyle = 'rgb('
-          + core_entities[entity]['brightness'] + ', '
-          + core_entities[entity]['brightness'] + ', '
-          + core_entities[entity]['brightness'] + ')';
-        canvas_buffer.fillRect(
-          core_entities[entity]['x'],
-          core_entities[entity]['y'],
-          3,
-          3
-        );
-    }
+    // Draw stars.
+    core_group_modify({
+      'groups': [
+        'star',
+      ],
+      'todo': function(entity){
+          canvas_buffer.fillStyle = 'rgb('
+            + core_entities[entity]['brightness'] + ', '
+            + core_entities[entity]['brightness'] + ', '
+            + core_entities[entity]['brightness'] + ')';
+          canvas_buffer.fillRect(
+            core_entities[entity]['x'],
+            core_entities[entity]['y'],
+            3,
+            3
+          );
+      },
+    });
 }
 
 function logic(){
@@ -35,31 +40,36 @@ function logic(){
         });
     }while(loop_counter--);
 
-    for(var entity in core_entities){
-        // Delete stars that are outside the canvas boundaries.
-        if(core_entities[entity]['x'] < 0
-          || core_entities[entity]['x'] > canvas_width
-          || core_entities[entity]['y'] < 0
-          || core_entities[entity]['y'] > canvas_height){
-            core_entity_remove({
-              'entities': [
-                entity,
-              ],
-            });
-            continue;
-        }
+    core_group_modify({
+      'groups': [
+        'star',
+      ],
+      'todo': function(entity){
+          // Delete stars that are outside the canvas boundaries.
+          if(core_entities[entity]['x'] < 0
+            || core_entities[entity]['x'] > canvas_width
+            || core_entities[entity]['y'] < 0
+            || core_entities[entity]['y'] > canvas_height){
+              core_entity_remove({
+                'entities': [
+                  entity,
+                ],
+              });
+              return;
+          }
 
-        // Increase star brightness.
-        core_entities[entity]['brightness'] += 9;
+          // Increase star brightness.
+          core_entities[entity]['brightness'] += 9;
 
-        // Update star positions based on brightness.
-        core_entities[entity]['x'] += Math.abs((core_entities[entity]['x'] - canvas_x) / canvas_x)
-          * ((core_entities[entity]['x'] > canvas_x ? ratio : -ratio) * 9)
-          * (core_entities[entity]['brightness'] / 99);
-        core_entities[entity]['y'] += Math.abs((core_entities[entity]['y'] - canvas_y) / canvas_y)
-          * (core_entities[entity]['y'] > canvas_y ? 9 : -9)
-          * (core_entities[entity]['brightness'] / 99);
-    }
+          // Update star positions based on brightness.
+          core_entities[entity]['x'] += Math.abs((core_entities[entity]['x'] - canvas_x) / canvas_x)
+            * ((core_entities[entity]['x'] > canvas_x ? ratio : -ratio) * 9)
+            * (core_entities[entity]['brightness'] / 99);
+          core_entities[entity]['y'] += Math.abs((core_entities[entity]['y'] - canvas_y) / canvas_y)
+            * (core_entities[entity]['y'] > canvas_y ? 9 : -9)
+            * (core_entities[entity]['brightness'] / 99);
+      },
+    });
 }
 
 function repo_init(){
