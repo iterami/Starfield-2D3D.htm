@@ -7,10 +7,14 @@ function draw_logic(){
         'star',
       ],
       'todo': function(entity){
-          canvas_buffer.fillStyle = 'rgb('
-            + core_entities[entity]['brightness'] + ', '
-            + core_entities[entity]['brightness'] + ', '
-            + core_entities[entity]['brightness'] + ')';
+          canvas_setproperties({
+            'properties': {
+              'fillStyle': 'rgb('
+                + core_entities[entity]['brightness'] + ', '
+                + core_entities[entity]['brightness'] + ', '
+                + core_entities[entity]['brightness'] + ')',
+            },
+          });
           canvas_buffer.fillRect(
             core_entities[entity]['x'],
             core_entities[entity]['y'],
