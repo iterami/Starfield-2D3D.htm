@@ -32,10 +32,10 @@ function logic(){
         core_entity_create({
           'properties': {
             'x': core_random_integer({
-              'max': canvas_width,
+              'max': canvas_properties['width'],
             }),
             'y': core_random_integer({
-              'max': canvas_height,
+              'max': canvas_properties['height'],
             }),
           },
           'types': [
@@ -51,9 +51,9 @@ function logic(){
       'todo': function(entity){
           // Delete stars that are outside the canvas boundaries.
           if(core_entities[entity]['x'] < 0
-            || core_entities[entity]['x'] > canvas_width
+            || core_entities[entity]['x'] > canvas_properties['width']
             || core_entities[entity]['y'] < 0
-            || core_entities[entity]['y'] > canvas_height){
+            || core_entities[entity]['y'] > canvas_properties['height']){
               core_entity_remove({
                 'entities': [
                   entity,
@@ -91,7 +91,7 @@ function repo_init(){
 }
 
 function resize_logic(){
-    ratio = canvas_width / canvas_height;
+    ratio = canvas_properties['width'] / canvas_properties['height'];
 }
 
 var ratio = 0;
