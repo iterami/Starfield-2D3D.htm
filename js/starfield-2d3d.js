@@ -66,11 +66,11 @@ function logic(){
           core_entities[entity]['brightness'] += 9;
 
           // Update star positions based on brightness.
-          core_entities[entity]['x'] += Math.abs((core_entities[entity]['x'] - canvas_x) / canvas_x)
-            * ((core_entities[entity]['x'] > canvas_x ? ratio : -ratio) * 9)
+          core_entities[entity]['x'] += Math.abs((core_entities[entity]['x'] - canvas_properties['width-half']) / canvas_properties['width-half'])
+            * ((core_entities[entity]['x'] > canvas_properties['width-half'] ? ratio : -ratio) * 9)
             * (core_entities[entity]['brightness'] / 99);
-          core_entities[entity]['y'] += Math.abs((core_entities[entity]['y'] - canvas_y) / canvas_y)
-            * (core_entities[entity]['y'] > canvas_y ? 9 : -9)
+          core_entities[entity]['y'] += Math.abs((core_entities[entity]['y'] - canvas_properties['height-half']) / canvas_properties['height-half'])
+            * (core_entities[entity]['y'] > canvas_properties['height-half'] ? 9 : -9)
             * (core_entities[entity]['brightness'] / 99);
       },
     });
