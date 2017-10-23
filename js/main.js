@@ -85,6 +85,9 @@ function repo_init(){
           },
         },
       },
+      'globals': {
+        'ratio': 0,
+      },
       'title': 'Starfield-2D3D.htm',
     });
     canvas_init();
@@ -93,5 +96,3 @@ function repo_init(){
 function resize_logic(){
     ratio = canvas_properties['width'] / canvas_properties['height'];
 }
-
-var ratio = 0;
