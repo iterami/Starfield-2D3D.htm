@@ -27,7 +27,7 @@ function draw_logic(){
 
 function logic(){
     // Create 5 stars at random positions.
-    var loop_counter = 4;
+    let loop_counter = 4;
     do{
         core_entity_create({
           'properties': {
