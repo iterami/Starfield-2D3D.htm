@@ -30,7 +30,6 @@ function logic(){
     let loop_counter = 4;
     do{
         core_entity_create({
-          'id': id_count,
           'properties': {
             'x': core_random_integer({
               'max': canvas_properties['width'],
@@ -43,7 +42,6 @@ function logic(){
             'star',
           ],
         });
-        id_count++;
     }while(loop_counter--);
 
     core_group_modify({
@@ -88,7 +86,6 @@ function repo_init(){
         },
       },
       'globals': {
-        'id_count': 0,
         'ratio': 0,
       },
       'title': 'Starfield-2D3D.htm',
