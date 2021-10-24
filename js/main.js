@@ -1,6 +1,6 @@
 'use strict';
 
-function draw_logic(){
+function repo_drawlogic(){
     // Draw stars.
     entity_group_modify({
       'groups': [
@@ -25,7 +25,7 @@ function draw_logic(){
     });
 }
 
-function logic(){
+function repo_logic(){
     // Create 5 stars at random positions.
     let loop_counter = 4;
     do{
@@ -92,6 +92,6 @@ function repo_init(){
     canvas_init();
 }
 
-function resize_logic(){
+function repo_resizelogic(){
     ratio = canvas_properties['width'] / canvas_properties['height'];
 }
