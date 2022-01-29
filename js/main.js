@@ -1,7 +1,6 @@
 'use strict';
 
 function repo_drawlogic(){
-    // Draw stars.
     entity_group_modify({
       'groups': [
         'star',
@@ -26,7 +25,6 @@ function repo_drawlogic(){
 }
 
 function repo_logic(){
-    // Create 5 stars at random positions.
     let loop_counter = 4;
     do{
         entity_create({
@@ -49,7 +47,6 @@ function repo_logic(){
         'star',
       ],
       'todo': function(entity){
-          // Delete stars that are outside the canvas boundaries.
           if(entity_entities[entity]['x'] < 0
             || entity_entities[entity]['x'] > canvas_properties['width']
             || entity_entities[entity]['y'] < 0
@@ -62,10 +59,7 @@ function repo_logic(){
               return;
           }
 
-          // Increase star brightness.
           entity_entities[entity]['brightness'] += 9;
-
-          // Update star positions based on brightness.
           entity_entities[entity]['x'] += Math.abs((entity_entities[entity]['x'] - canvas_properties['width-half']) / canvas_properties['width-half'])
             * ((entity_entities[entity]['x'] > canvas_properties['width-half'] ? ratio : -ratio) * 9)
             * (entity_entities[entity]['brightness'] / 99);
