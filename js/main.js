@@ -17,15 +17,15 @@ function repo_drawlogic(){
           canvas_buffer.fillRect(
             entity_entities[entity]['x'],
             entity_entities[entity]['y'],
-            3,
-            3
+            core_storage_data['stars-width'],
+            core_storage_data['stars-height']
           );
       },
     });
 }
 
 function repo_logic(){
-    let loop_counter = 4;
+    let loop_counter = core_storage_data['stars-frame'];
     do{
         entity_create({
           'properties': {
@@ -75,6 +75,14 @@ function repo_init(){
       'globals': {
         'ratio': 0,
       },
+      'storage': {
+        'stars-frame': 4,
+        'stars-height': 3,
+        'stars-width': 3,
+      },
+      'storage-menu': '<table><tr><td><input class=mini id=stars-frame min=1 step=any type=number><td>Stars/Frame'
+        + '<tr><td><input class=mini id=stars-height min=1 step=any type=number><td>Stars Height'
+        + '<tr><td><input class=mini id=stars-width min=1 step=any type=number><td>Stars Width</table>',
       'title': 'Starfield-2D3D.htm',
     });
     entity_set({
