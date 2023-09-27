@@ -14,7 +14,7 @@ function repo_drawlogic(){
                 + entity_entities[entity]['brightness'] + ')',
             },
           });
-          canvas_buffer.fillRect(
+          canvas.fillRect(
             entity_entities[entity]['x'],
             entity_entities[entity]['y'],
             core_storage_data['stars-width'],
