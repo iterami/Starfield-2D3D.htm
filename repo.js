@@ -7,12 +7,10 @@ function repo_drawlogic(){
       ],
       'todo': function(entity){
           canvas_setproperties({
-            'properties': {
-              'fillStyle': 'rgb('
-                + entity_entities[entity]['brightness'] + ', '
-                + entity_entities[entity]['brightness'] + ', '
-                + entity_entities[entity]['brightness'] + ')',
-            },
+            'fillStyle': 'rgb('
+              + entity_entities[entity]['brightness'] + ', '
+              + entity_entities[entity]['brightness'] + ', '
+              + entity_entities[entity]['brightness'] + ')',
           });
           canvas.fillRect(
             entity_entities[entity]['x'],
