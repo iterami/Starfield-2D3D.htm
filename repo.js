@@ -23,7 +23,7 @@ function repo_drawlogic(){
 }
 
 function repo_logic(){
-    let loop_counter = core_storage_data['stars-frame'];
+    let loop_counter = Math.floor(core_storage_data['stars-frame']);
     do{
         entity_create({
           'properties': {
@@ -78,7 +78,7 @@ function repo_init(){
         'stars-height': 3,
         'stars-width': 3,
       },
-      'storage-menu': '<table><tr><td><input class=mini id=stars-frame min=1 step=any type=number><td>Stars/Frame'
+      'storage-menu': '<table><tr><td><input class=mini id=stars-frame min=1 step=1 type=number><td>Stars/Frame'
         + '<tr><td><input class=mini id=stars-height min=1 step=any type=number><td>Stars Height'
         + '<tr><td><input class=mini id=stars-width min=1 step=any type=number><td>Stars Width</table>',
       'title': 'Starfield-2D3D.htm',
