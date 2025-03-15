@@ -8,13 +8,13 @@ function repo_drawlogic(){
       'todo': function(entity){
           canvas_setproperties({
             'fillStyle': 'rgb('
-              + entity_entities[entity]['brightness'] + ', '
-              + entity_entities[entity]['brightness'] + ', '
-              + entity_entities[entity]['brightness'] + ')',
+              + entity['brightness'] + ', '
+              + entity['brightness'] + ', '
+              + entity['brightness'] + ')',
           });
           canvas.fillRect(
-            entity_entities[entity]['x'],
-            entity_entities[entity]['y'],
+            entity['x'],
+            entity['y'],
             core_storage_data['stars-width'],
             core_storage_data['stars-height']
           );
@@ -45,25 +45,25 @@ function repo_logic(){
         'star',
       ],
       'todo': function(entity){
-          if(entity_entities[entity]['x'] < 0
-            || entity_entities[entity]['x'] > canvas_properties['width']
-            || entity_entities[entity]['y'] < 0
-            || entity_entities[entity]['y'] > canvas_properties['height']){
+          if(entity['x'] < 0
+            || entity['x'] > canvas_properties['width']
+            || entity['y'] < 0
+            || entity['y'] > canvas_properties['height']){
               entity_remove({
                 'entities': [
-                  entity,
+                  entity['id'],
                 ],
               });
               return;
           }
 
-          entity_entities[entity]['brightness'] += 9;
-          entity_entities[entity]['x'] += Math.abs((entity_entities[entity]['x'] - canvas_properties['width-half']) / canvas_properties['width-half'])
-            * ((entity_entities[entity]['x'] > canvas_properties['width-half'] ? ratio : -ratio) * 9)
-            * (entity_entities[entity]['brightness'] / 99);
-          entity_entities[entity]['y'] += Math.abs((entity_entities[entity]['y'] - canvas_properties['height-half']) / canvas_properties['height-half'])
-            * (entity_entities[entity]['y'] > canvas_properties['height-half'] ? 9 : -9)
-            * (entity_entities[entity]['brightness'] / 99);
+          entity['brightness'] += 9;
+          entity['x'] += Math.abs((entity['x'] - canvas_properties['width-half']) / canvas_properties['width-half'])
+            * ((entity['x'] > canvas_properties['width-half'] ? ratio : -ratio) * 9)
+            * (entity['brightness'] / 99);
+          entity['y'] += Math.abs((entity['y'] - canvas_properties['height-half']) / canvas_properties['height-half'])
+            * (entity['y'] > canvas_properties['height-half'] ? 9 : -9)
+            * (entity['brightness'] / 99);
       },
     });
 }
