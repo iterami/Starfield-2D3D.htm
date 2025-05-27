@@ -22,6 +22,30 @@ function repo_drawlogic(){
     });
 }
 
+function repo_init(){
+    core_repo_init({
+      'globals': {
+        'ratio': 0,
+      },
+      'storage': {
+        'stars-frame': 4,
+        'stars-height': 3,
+        'stars-width': 3,
+      },
+      'storage-menu': '<table><tr><td><input class=mini id=stars-frame min=1 step=1 type=number><td>Stars/Frame'
+        + '<tr><td><input class=mini id=stars-height min=1 step=any type=number><td>Stars Height'
+        + '<tr><td><input class=mini id=stars-width min=1 step=any type=number><td>Stars Width</table>',
+      'title': 'Starfield-2D3D.htm',
+    });
+    entity_set({
+      'properties': {
+        'brightness': 0,
+      },
+      'type': 'star',
+    });
+    canvas_init();
+}
+
 function repo_logic(){
     let loop_counter = Math.floor(core_storage_data['stars-frame']);
     do{
@@ -66,30 +90,6 @@ function repo_logic(){
             * (entity['brightness'] / 99);
       },
     });
-}
-
-function repo_init(){
-    core_repo_init({
-      'globals': {
-        'ratio': 0,
-      },
-      'storage': {
-        'stars-frame': 4,
-        'stars-height': 3,
-        'stars-width': 3,
-      },
-      'storage-menu': '<table><tr><td><input class=mini id=stars-frame min=1 step=1 type=number><td>Stars/Frame'
-        + '<tr><td><input class=mini id=stars-height min=1 step=any type=number><td>Stars Height'
-        + '<tr><td><input class=mini id=stars-width min=1 step=any type=number><td>Stars Width</table>',
-      'title': 'Starfield-2D3D.htm',
-    });
-    entity_set({
-      'properties': {
-        'brightness': 0,
-      },
-      'type': 'star',
-    });
-    canvas_init();
 }
 
 function repo_resizelogic(){
