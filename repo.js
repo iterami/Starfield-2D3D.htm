@@ -51,12 +51,8 @@ function repo_logic(){
     do{
         entity_create({
           'properties': {
-            'x': core_random_integer({
-              'max': canvas_properties['width'],
-            }),
-            'y': core_random_integer({
-              'max': canvas_properties['height'],
-            }),
+            'x': core_random_integer(canvas_properties['width']),
+            'y': core_random_integer(canvas_properties['height']),
           },
           'types': [
             'star',
