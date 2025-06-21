@@ -32,7 +32,7 @@ function repo_init(){
         'stars_height': 3,
         'stars_width': 3,
       },
-      'storage-menu': '<table><tr><td><input class=mini id=stars_frame min=1 step=1 type=number><td>Stars/Frame'
+      'storage_menu': '<table><tr><td><input class=mini id=stars_frame min=1 step=1 type=number><td>Stars/Frame'
         + '<tr><td><input class=mini id=stars_height min=1 step=any type=number><td>Stars Height'
         + '<tr><td><input class=mini id=stars_width min=1 step=any type=number><td>Stars Width</table>',
       'title': 'Starfield-2D3D.htm',
