@@ -77,7 +77,7 @@ function repo_logic(){
               return;
           }
 
-          entity.brightness += 9;
+          entity.brightness += 5;
           entity.x += Math.abs((entity.x - canvas_properties.width_half) / canvas_properties.width_half)
             * ((entity.x > canvas_properties.width_half ? ratio : -ratio) * 9)
             * (entity.brightness / 99);
