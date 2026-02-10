@@ -1,24 +1,48 @@
 'use strict';
 
+function draw_star(entity){
+    canvas_setproperties({
+      'fillStyle': 'rgb('
+        + entity.brightness + ', '
+        + entity.brightness + ', '
+        + entity.brightness + ')',
+    });
+    canvas.fillRect(
+      entity.x,
+      entity.y,
+      core_storage_data.stars_width,
+      core_storage_data.stars_height
+    );
+}
+
+function move_star(entity){
+    if(entity.x < 0
+      || entity.x > canvas_properties.width
+      || entity.y < 0
+      || entity.y > canvas_properties.height){
+        entity_remove({
+          'entities': [
+            entity.id,
+          ],
+        });
+        return;
+    }
+
+    entity.brightness += 5;
+    entity.x += Math.abs((entity.x - canvas_properties.width_half) / canvas_properties.width_half)
+      * ((entity.x > canvas_properties.width_half ? ratio : -ratio) * 9)
+      * (entity.brightness / 99);
+    entity.y += Math.abs((entity.y - canvas_properties.height_half) / canvas_properties.height_half)
+      * (entity.y > canvas_properties.height_half ? 9 : -9)
+      * (entity.brightness / 99);
+}
+
 function repo_drawlogic(){
     entity_group_modify({
       'groups': [
         'star',
       ],
-      'todo': function(entity){
-          canvas_setproperties({
-            'fillStyle': 'rgb('
-              + entity.brightness + ', '
-              + entity.brightness + ', '
-              + entity.brightness + ')',
-          });
-          canvas.fillRect(
-            entity.x,
-            entity.y,
-            core_storage_data.stars_width,
-            core_storage_data.stars_height
-          );
-      },
+      'todo': draw_star,
     });
 }
 
@@ -64,27 +88,7 @@ function repo_logic(){
       'groups': [
         'star',
       ],
-      'todo': function(entity){
-          if(entity.x < 0
-            || entity.x > canvas_properties.width
-            || entity.y < 0
-            || entity.y > canvas_properties.height){
-              entity_remove({
-                'entities': [
-                  entity.id,
-                ],
-              });
-              return;
-          }
-
-          entity.brightness += 5;
-          entity.x += Math.abs((entity.x - canvas_properties.width_half) / canvas_properties.width_half)
-            * ((entity.x > canvas_properties.width_half ? ratio : -ratio) * 9)
-            * (entity.brightness / 99);
-          entity.y += Math.abs((entity.y - canvas_properties.height_half) / canvas_properties.height_half)
-            * (entity.y > canvas_properties.height_half ? 9 : -9)
-            * (entity.brightness / 99);
-      },
+      'todo': move_star,
     });
 }
 
