@@ -71,8 +71,7 @@ function repo_init(){
 }
 
 function repo_logic(){
-    let loop_counter = Math.floor(core_storage_data.stars_frame);
-    do{
+    for(let i = 0; i < core_storage_data.stars_frame; i++){
         entity_create({
           'properties': {
             'x': core_random_integer(canvas_properties.width),
@@ -82,7 +81,7 @@ function repo_logic(){
             'star',
           ],
         });
-    }while(loop_counter--);
+    }
 
     entity_group_modify({
       'groups': [
